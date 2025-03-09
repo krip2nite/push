@@ -1,0 +1,29 @@
+html {
+    font-size: 62.5%;
+}
+body {
+    text-align: center;
+}
+.gallery--item {
+    border: 4px solid lightgray;
+    border-radius: 40px;
+    width: 20rem;
+    overflow: hidden;
+    display: inline-block
+}
+.gallery--item_title {
+    display: block;
+    font-size: 2rem;
+    width: 20rem;
+    background-color: blue;
+    text-align: center;
+    color: aliceblue;
+}
+.gallery {
+    list-style: none;
+    margin-top: 20vh
+   
+}
+.gallery--item_image {
+    display: block
+}
