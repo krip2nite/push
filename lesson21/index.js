@@ -1,14 +1,14 @@
 import { testframework } from "./testframework.js";
-// Array.prototype.reduce = function() {
-//     return 0;
-// }
-//delete Array.prototype.reduce;
-Array.prototype.sum = function() {
-    const res = this.reduce((acc, cur) => acc + cur);
-    return res;
+function f1() {
+    return "kuku";
 }
-testframework("Testing new method for all arrays",
-    'const arr1 = [1,2,3]; const arr2 = [3,4,"a"];',
-    ['arr1.sum();', 'arr2.sum();'],
-    [6,"7a"]
-);
+function sum(op1 = 10, op2 = 20) {
+    return op1 + op2;
+}
+Function.prototype.toString = function(){
+    return this().toString();
+}
+// console.log(f1.toString());
+// console.log(sum.toString());
+console.log(`sum.call(undifined, 1 ,2) = ${sum.call(undefined, 1 ,2)}`)
+console.log(`sum.apply(undifined, [1 ,2]) = ${sum.apply(undefined, [1 ,2])}`)
