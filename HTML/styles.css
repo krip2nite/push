@@ -10,6 +10,11 @@
     border-radius: 50%;
     display: inline-block;
   } */
+   
+  /* @font-face {
+    font-family: airstream;
+    src: url("fonts/Airstream.woff2") format('woff2');
+} */
 .olympic-ring-container {
   display: flex;
   flex-direction: column;

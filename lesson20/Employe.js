@@ -8,4 +8,8 @@ export default class Employe {
     computeSalary(){
         return this.basicSalary;
     }
+    getEmployeName()
+    {
+        return this.name;
+    }
 }

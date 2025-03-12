@@ -1,4 +1,4 @@
-import Employe from "./Employe";
+import Employe from "./Employe.js";
 export default class WageEmployee extends Employe {
     constructor(name, basicSalary, department, hours, wage){
         super(name, basicSalary, department);
