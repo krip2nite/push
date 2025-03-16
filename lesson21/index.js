@@ -1,31 +1,43 @@
 import { testframework } from "./testframework.js";
-class X {
-    constructor(arr){
-        this.arr = arr;
+// questions for interview
+
+// write class Deffered for printing out the folowing
+
+class Deferred{
+    constructor(){
+        this.callbacks = [];
+        this.resolved = false;
+        this.value = undefined;
     }
-    logElements(){
-        this.arr.forEach(e => console.log(e));
+    then(callback){
+        if (this.resolved)
+            callback(this.value);
+        else
+        this.callbacks.push(callback);
     }
-    sumElements(){
-        return this.arr.reduce((acc,cur) => acc + cur);
+    resolve(value){
+        this.value = value;
+        this.resolved = true;
+        for (let callback of this.callbacks){
+            this.value = callback(this.value);
+        }
     }
-    action(fun){
-        return fun.call(this);
-    }
-    joinElements(){
-        return this.arr.join();
-    }
-    actionBind(fun){
-        return fun();
+    getResult(res){
+        return this.result = res;
     }
 }
-const obgX = new X([1,2,3,20,40]);
-// obgX.logElements();
-// console.log(obgX.sumElements());
-// obgX.action(obgX.logElements);
-// console.log(obgX.action(obgX.sumElements));
-// console.log(obgX.action(function(){
-//     return this.arr.join();
-// }));
-console.log(obgX.action(obgX.joinElements));
-console.log(obgX.actionBind(obgX.sumElements.bind(obgX)));
+
+const d = new Deferred()
+d.then(function(res){console.log("1", res); return "a"});
+d.then(function(res){console.log("2", res); return "b"});
+d.then(function(res){console.log("3", res); return "c"});
+d.resolve('hello');
+//1. hello
+//2. a
+//3. b
+
+// write method myBind with the same behavior as the standard "bind" method
+// you may use any standard methods except "bind"
+// Function.prototype.myBind = function(thisArg, ...argsBind) {
+//     return (...callArgs) => this.apply(thisArg, [...argsBind, ...callArgs]);
+// }
