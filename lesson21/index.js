@@ -2,7 +2,6 @@ import { testframework } from "./testframework.js";
 // questions for interview
 
 // write class Deffered for printing out the folowing
-
 class Deferred{
     constructor(){
         this.callbacks = [];
