@@ -53,5 +53,8 @@ function getPromise(timeout, value) {
   console.log("waiting for the data coming from the server...");
   //Promise.all([promise1, promise2]).then(() => console.log("data processed")); // working by order in the array of promises given,
   //  and after all finished, prints data processed
-  Promise.race([promise1, promise2]).then(() => console.log("data processed")); // the first to finish is the first to print,
+  //Promise.race([promise1, promise2]).then(() => console.log("data processed")); // the first to finish is the first to print,
   //  data processed will be printed after 1 finishes
+  const promises = [promise1, promise2];
+  Promise.allSettled(promises).then(() => console.log("data processed"));
+  
