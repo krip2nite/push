@@ -10,42 +10,45 @@ function getUserPassword(probCorrectPass){
 function login(password) {
     //TO Do
     //returns promise in the state resolved only for password 'correct' otherwise state rejected
+    const timeout = 2000;
     return new Promise((resolve, reject)=> {
         if(password == 'correct'){
-            resolve('Login successful');
+            resolve(console.log('Login successful'), timeout);
         }
         else{
             reject('wrong credentials');
         }
     })
 }
-function getUserData(username){
+function getUserData(username, password){
     //TO DO
     //returns promise in the state resolved if username exists with returning user data
     //otherwise state rejected with apropriate message "username doesn't exist"
-    return new Promise((resolve, reject)=> {
+    const timeout = 1000;
+    return new Promise(async(resolve, reject)=> {
     const users = {'Vasya' : {name: "Vasya", age: 30}, 'Petya': {name: "Petya", age: 40}}
     if (users[username]){
-        resolve(`welcome ${username}`);
+        await login(password);
+        resolve(`welcome ${username}`, timeout);
     }
     else if (!users[username]){
-        throw `username ${username} doesn't exist`;
+        reject();
     }
-    }
-   
+    }).catch(error => {console.log(`username ${username} doesn't exist`);});
 }
 
-function funStackExample(username){
+
+async function funStackExample(username){
     try{
-        const password = await(getUserPassword(0.8));
-        login(password);
-        const userData = await(getUserData(username));
-        console.log(userData);
+        const password = await getUserPassword(0.8);
+        const userData = await getUserData(username, password);
+        if (userData != undefined)
+            console.log(userData);
     }
     catch (error){
         console.log(`error ${error}`);
     }
 }
-//runs the same functionality but with calling asynchronous functions
 
 funStackExample('Sara');
+funStackExample('Vasya');
