@@ -21,9 +21,6 @@ class Deferred{
             this.value = callback(this.value);
         }
     }
-    getResult(res){
-        return this.result = res;
-    }
 }
 
 const d = new Deferred()
