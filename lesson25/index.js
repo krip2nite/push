@@ -85,17 +85,31 @@
 // question 37 - 40 need to check in program
 
 // question 46
-const myPromise = () => Promise.resolve('I have resolved!');
+// const myPromise = () => Promise.resolve('I have resolved!');
 
-function firstFunction(){
-    myPromise().then(res => console.log(res));
-    console.log('second')
+// function firstFunction(){
+//     myPromise().then(res => console.log(res));
+//     console.log('second')
+// }
+
+// async function secondFunction() {
+//     console.log(await myPromise());
+//     console.log('second');
+// }
+
+// firstFunction();
+// secondFunction(); // prints second , I have resolved! , I have resolved! , second
+
+const promise1 =
+Promise.resolve('First')
+const promise2 = Promise.resolve('Second')
+const promise3 = Promise.reject('Third')
+const promise4 = Promise.resolve('Fourth')
+const runPromises = async () => {
+    const res1 = await Promise.all([promise1, promise2])
+    const res2 = await Promise.all([promise3, promise4])
+    return [res1, res2]
 }
-
-async function secondFunction() {
-    console.log(await myPromise());
-    console.log('second');
-}
-
-firstFunction();
-secondFunction(); // prints second , I have resolved! , I have resolved! , second
+runPromises()
+.then(res => console.log(res))
+.catch(err => console.log(err)) // output "Third"
