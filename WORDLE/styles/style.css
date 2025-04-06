@@ -1,0 +1,41 @@
+body{
+    text-align: center;
+}
+.main{
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* puts heiqher */ margin-top: -15vh;
+}
+.buttons{
+    margin-top: 10vh;
+}
+#submit-button{
+    margin-right: 2vw;
+}
+#play-again{
+    display: none;
+}
+.word-input{
+    font-size: 1.5rem;
+    width: 20vw;
+}
+.btn{
+    font-size: 1.3rem;
+}
+.logo{
+    font-size: 3rem;
+}
+.colored-letters{
+    margin-top:  10vh;
+    display: flex;
+}
+.letter{
+    width: 5vh;
+    height: 5vh;
+    /* making border */
+    border: 1px solid grey; 
+    background-color: aliceblue;
+}

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wordle</title>
+    <link rel="stylesheet" href="../styles/style.css">
+</head>
+<body>
+    <header>
+        <h1 class="logo">Wordle Game</h1>
+    </header>
+    <main class="main">
+        <section class="input-section">
+            <form id="guess-word" onsubmit="onSubmit(event)">
+                <input class="word-input" name="word" oninput="onInput()" placeholder="enter word">
+                <div class="buttons">
+                    <button class="btn" id="submit-button" disabled>Submit</button>
+                    <button class="btn" type="reset">Reset</button>
+                </div>
+            </form>
+        </section>
+        <section class="colored-letters">
+            <!-- here there will be colored letters of guessed word -->
+        </section>
+        <section class="game-status">
+            <p id="tryels"></p>
+            <p id="game-over"></p>
+            <button id="play-again" onclick="startGame()">Play Again</button>
+        </section>
+    </main>
+    <script src ="..src/main.js"></script>
+</body>
+</html>

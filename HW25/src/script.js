@@ -1,30 +1,35 @@
 const detailedImage = document.querySelector(".detailedContainer--image");
 const detailedTitle = document.querySelector(".detailedContainer--title");
 let galleryImages;
-const galleryElem = document.getElementById("cats_gallery");
+const galleryElem = document.getElementById("movies_gallery");
 async function drawGalleryItems() {
-   const response = await fetch("https://api.thecatapi.com/v1/breeds");
-   const data = await response.json();
-   const itemsData = getItemsData(data); //input data from API, output - array of objects
+   const response = await Promise.all([
+    fetch("https://api.themoviedb.org/3/movie/popular?api_key=7d7502123a7544a07d23af110df100be&page=1"),
+    fetch("https://api.themoviedb.org/3/movie/popular?api_key=7d7502123a7544a07d23af110df100be&page=2"),
+    fetch("https://api.themoviedb.org/3/movie/popular?api_key=7d7502123a7544a07d23af110df100be&page=3")]);
+   const data = await Promise.all(response.map(response => response.json()));
+   const mergeData = data.flatMap(page => page.results);
+   const itemsData = getItemsData(mergeData); //input data from API, output - array of objects
    //  {itemImage, detailedImage, title, detailedTitle}
    const items = getItems(itemsData);
    galleryElem.innerHTML = items;
    galleryImages = document.querySelectorAll(".gallery--item_image");
    addLIsteners();
- 
  }
  drawGalleryItems();
  function getItemsData(data) {
-    const itemsData = data.map(record =>
-      ({itemImage: getImage(record.reference_image_id),
-        detailedImage: getImage(record.reference_image_id),
-       title:record.name,
-       detailedTitle: record.description}));
-       return itemsData
+ const itemsData = [];
+ for(let i = 0; i < data.length; i ++){
+      itemsData.push(
+        {itemImage: getImage(data[i].backdrop_path),
+        detailedImage: getImage(data[i].poster_path),
+        title:data[i].original_title,
+        detailedTitle: data[i].overview});}
+  return itemsData;
  }
  function getItems(itemsData) {
-   const items = itemsData.map(getItem);
-   return items.join();
+  const items = itemsData.map(getItem);
+  return items.join();
  }
  function getItem({itemImage, detailedImage, title, detailedTitle}) {
    return `<li class="gallery--item">
@@ -39,7 +44,7 @@ async function drawGalleryItems() {
          </li>`
  }
  function getImage(image_id) {
-   return `https://cdn2.thecatapi.com/images/${image_id}.jpg`
+   return `https://image.tmdb.org/t/p/w500/${image_id}`
  }
  function addLIsteners() {
    for (let i = 0; i < galleryImages.length; i++) {
@@ -48,7 +53,6 @@ async function drawGalleryItems() {
      });
    }
  }
- 
  function setDetails(galleryImage) {
   let image = galleryImage.getAttribute("data-detailed-image");
   detailedImage.src = "";
