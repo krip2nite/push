@@ -1,11 +1,19 @@
-import { useState } from 'react'
+import {useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
- // const [count, setCount] = useState(new Date().toLocaleTimeString)
+  const [time, setTime] = useState(new Date().toLocaleTimeString())
+  useEffect(() => {
+    console.log("useEffect called")
+    function tic () {
+      setTime(new Date().toLocaleTimeString());
+      console.log("tic function")
+    }
+    setInterval(tic, 1000)
+},[])
+
   return (
     <>
       <div>
@@ -18,9 +26,9 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
+        <label >
+          current time is {time}
+        </label>
         <p>
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>
